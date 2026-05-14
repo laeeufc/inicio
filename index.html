@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambulatório de Feridas Complexas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #003d7a;
+            --primary-blue: #0066cc;
+            --accent-light: #0099ff;
+            --light-bg: #f0f4f8;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --border-color: #e0e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e8eef7 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Grid de Botões */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 102, 204, 0.15);
+            border-color: var(--accent-light);
+        }
+
+        /* Cards Claros */
+        .card.light {
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .card.light .icon {
+            color: var(--accent-light);
+        }
+
+        .card.light .title {
+            color: var(--primary-dark);
+        }
+
+        /* Cards Escuros */
+        .card.dark {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #002d5c 100%);
+            color: var(--white);
+        }
+
+        .card.dark .icon {
+            color: var(--accent-light);
+        }
+
+        .card.dark .title {
+            color: var(--white);
+        }
+
+        .card.dark:hover {
+            box-shadow: 0 12px 24px rgba(0, 102, 204, 0.25);
+        }
+
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon {
+            transform: scale(1.1) rotateY(10deg);
+        }
+
+        .title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Special Card - Lista de Pacientes */
+        .card.feature {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-light) 100%);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card.feature::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .feature-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .feature .icon {
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .feature .title {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .feature-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--white);
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-btn:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+            transform: scale(1.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card.feature {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Animação de entrada */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Links nos botões */
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">🏥</div>
+                <div class="logo-text">
+                    <h1>Ambulatório de Feridas Complexas</h1>
+                    <p>Sistema de Gerenciamento</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2 class="section-title">Funcionalidades Principais</h2>
+
+        <div class="buttons-grid">
+            <!-- Card Principal - Lista de Pacientes -->
+            <div class="card feature">
+                <div class="feature-content">
+                    <div class="icon">📁</div>
+                    <div class="title">Prontuários</div>
+                </div>
+                <div class="feature-content"></div>
+            </div>
+
+            <!-- Card 1 - Evolução de Enfermagem -->
+            <div class="card light">
+                <a href="#">
+                    <div class="icon">📋</div>
+                    <div class="title">Evolução de Enfermagem</div>
+                    <div class="description">Acompanhe o progresso clínico do paciente</div>
+                </a>
+            </div>
+
+            <!-- Card 2 - Admissão -->
+            <div class="card light">
+                <a href="#">
+                    <div class="icon">👤</div>
+                    <div class="title">Admissão</div>
+                    <div class="description">Registre novos pacientes no sistema</div>
+                </a>
+            </div>
+
+            <!-- Card 3 - Alta -->
+            <div class="card light">
+                <a href="#">
+                    <div class="icon">🩹</div>
+                    <div class="title">Alta</div>
+                    <div class="description">Finalize o atendimento do paciente</div>
+                </a>
+            </div>
+
+            <!-- Card 4 - Indicadores -->
+            <div class="card dark">
+                <a href="#">
+                    <div class="icon">📊</div>
+                    <div class="title">Indicadores</div>
+                    <div class="description">Visualize métricas e estatísticas</div>
+                </a>
+            </div>
+
+            <!-- Card 5 - Agenda de Atendimentos -->
+            <div class="card dark">
+                <a href="#">
+                    <div class="icon">📅</div>
+                    <div class="title">Agenda de Atendimentos</div>
+                    <div class="description">Gerencie agendamentos e consultas</div>
+                </a>
+            </div>
+
+            <!-- Card 6 - Estoque de Materiais -->
+            <div class="card dark">
+                <a href="#">
+                    <div class="icon">📦</div>
+                    <div class="title">Estoque de Materiais</div>
+                    <div class="description">Controle de materiais e insumos</div>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
