@@ -516,14 +516,6 @@
                     <p>Sistema de Gerenciamento</p>
                 </div>
             </div>
-            <div class="header-actions">
-                <div class="header-menu">
-                    <button class="menu-btn">📋 Pacientes</button>
-                    <div style="width: 1px; height: 24px; background: var(--border-color);"></div>
-                    <button class="menu-btn">📦 Materiais</button>
-                </div>
-                <button class="profile-btn">👤 Meu Perfil</button>
-            </div>
         </div>
     </header>
 
@@ -549,20 +541,7 @@
 
         <!-- Cards Grid -->
         <section class="cards-grid">
-            <!-- Card 1 - Prontuários -->
-            <div class="card gradient-1" data-category="pacientes">
-                <div class="card-icon">📁</div>
-                <div class="card-content">
-                    <h3 class="card-title">Prontuários</h3>
-                    <p class="card-description">Acesse e gerencie todos os registros de pacientes</p>
-                </div>
-                <div class="card-footer">
-                    <span>Abrir</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </div>
-
-            <!-- Card 2 - Evolução de Enfermagem -->
+            <!-- Card 1 - Evolução de Enfermagem -->
             <div class="card gradient-2" data-category="pacientes">
                 <div class="card-icon">📋</div>
                 <div class="card-content">
@@ -575,7 +554,7 @@
                 </div>
             </div>
 
-            <!-- Card 3 - Admissão -->
+            <!-- Card 2 - Admissão -->
             <div class="card gradient-3" data-category="pacientes">
                 <div class="card-icon">👤</div>
                 <div class="card-content">
@@ -588,15 +567,28 @@
                 </div>
             </div>
 
-            <!-- Card 4 - Alta -->
+            <!-- Card 3 - Alta -->
             <div class="card gradient-4" data-category="pacientes">
                 <div class="card-icon">🩹</div>
                 <div class="card-content">
-                    <h3 class="card-title">Alta Médica</h3>
+                    <h3 class="card-title">Alta Ambulatorial</h3>
                     <p class="card-description">Finalize o atendimento do paciente</p>
                 </div>
                 <div class="card-footer">
                     <span>Registrar Alta</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </div>
+
+            <!-- Card 4 - Prontuários (último de pacientes) -->
+            <div class="card gradient-1" data-category="pacientes">
+                <div class="card-icon">📁</div>
+                <div class="card-content">
+                    <h3 class="card-title">Prontuários</h3>
+                    <p class="card-description">Acesse e gerencie todos os registros de pacientes</p>
+                </div>
+                <div class="card-footer">
+                    <span>Abrir</span>
                     <span class="card-arrow">→</span>
                 </div>
             </div>
@@ -617,6 +609,11 @@
     </main>
 
     <script>
+        // Inicializar mostrando apenas pacientes
+        document.addEventListener('DOMContentLoaded', function() {
+            filterCards('pacientes');
+        });
+
         function filterCards(category) {
             const cards = document.querySelectorAll('.card');
             const tabs = document.querySelectorAll('.nav-tab');
