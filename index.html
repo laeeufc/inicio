@@ -449,12 +449,14 @@
             }
 
             .nav-tabs {
-                gap: 0.3rem;
+                gap: 0.5rem;
             }
 
             .nav-tab {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+                flex: 1;
+                text-align: center;
             }
 
             .card {
@@ -611,27 +613,42 @@
     <script>
         // Inicializar mostrando apenas pacientes
         document.addEventListener('DOMContentLoaded', function() {
-            filterCards('pacientes');
+            const cards = document.querySelectorAll('.card');
+            const tabs = document.querySelectorAll('.nav-tab');
+            
+            // Mostrar apenas pacientes
+            cards.forEach(card => {
+                if (card.dataset.category === 'pacientes') {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Marcar primeira aba como ativa
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[0].classList.add('active');
         });
 
         function filterCards(category) {
             const cards = document.querySelectorAll('.card');
             const tabs = document.querySelectorAll('.nav-tab');
+            const clickedTab = event.target;
 
+            // Remover active de todas as abas
             tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // Adicionar active na aba clicada
+            clickedTab.classList.add('active');
 
-            if (category === 'todos') {
-                cards.forEach(card => card.style.display = '');
-            } else {
-                cards.forEach(card => {
-                    if (card.dataset.category === category) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
+            // Filtrar cards
+            cards.forEach(card => {
+                if (card.dataset.category === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
