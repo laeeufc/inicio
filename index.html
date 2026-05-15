@@ -235,6 +235,20 @@
             color: var(--primary-blue);
         }
 
+        /* Remover hover em mobile */
+        @media (hover: none) {
+            .nav-tab:hover {
+                border-color: var(--border-color);
+                color: var(--text-light);
+            }
+
+            .nav-tab.active:hover {
+                background: var(--primary-blue);
+                color: var(--white);
+                border-color: var(--primary-blue);
+            }
+        }
+
         /* Cards Grid */
         .cards-grid {
             display: grid;
