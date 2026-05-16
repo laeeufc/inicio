@@ -546,19 +546,20 @@
                     <p>Acesse e gerencie registros de pacientes</p>
                 </div>
             </div>
-            <button class="prontuario-btn">Abrir Prontuário</button>
+            <button class="prontuario-btn" onclick="window.open('https://evolucoes.tilaeeufc.workers.dev/Prontuario', '_blank')">Abrir Prontuário</button>
         </section>
 
         <!-- Navigation Tabs -->
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="filterCards('pacientes')">Pacientes</button>
             <button class="nav-tab" onclick="filterCards('materiais')">Materiais</button>
+            <button class="nav-tab" onclick="filterCards('agenda')">Agenda</button>
         </nav>
 
         <!-- Cards Grid -->
         <section class="cards-grid">
             <!-- Card 1 - Evolução de Enfermagem -->
-            <div class="card gradient-2" data-category="pacientes">
+            <div class="card gradient-2" data-category="pacientes" onclick="window.open('https://evolucoes.tilaeeufc.workers.dev/', '_blank')" style="cursor:pointer;">
                 <div class="card-icon">📋</div>
                 <div class="card-content">
                     <h3 class="card-title">Evolução de Enfermagem</h3>
@@ -571,7 +572,7 @@
             </div>
 
             <!-- Card 2 - Admissão -->
-            <div class="card gradient-3" data-category="pacientes">
+            <div class="card gradient-3" data-category="pacientes" onclick="window.open('https://admissao.pages.dev/', '_blank')" style="cursor:pointer;">
                 <div class="card-icon">👤</div>
                 <div class="card-content">
                     <h3 class="card-title">Admissão</h3>
@@ -597,7 +598,7 @@
             </div>
 
             <!-- Card 4 - Prontuários (último de pacientes) -->
-            <div class="card gradient-1" data-category="pacientes">
+            <div class="card gradient-1" data-category="pacientes" onclick="window.open('https://evolucoes.tilaeeufc.workers.dev/Prontuario', '_blank')" style="cursor:pointer;">
                 <div class="card-icon">📁</div>
                 <div class="card-content">
                     <h3 class="card-title">Prontuários</h3>
@@ -610,7 +611,7 @@
             </div>
 
             <!-- Card 5 - Controle de Estoque -->
-            <div class="card gradient-5" data-category="materiais">
+            <div class="card gradient-5" data-category="materiais" onclick="window.open('https://materiais.tilaeeufc.workers.dev/', '_blank')" style="cursor:pointer;">
                 <div class="card-icon">📦</div>
                 <div class="card-content">
                     <h3 class="card-title">Controle de Estoque</h3>
@@ -621,8 +622,19 @@
                     <span class="card-arrow">→</span>
                 </div>
             </div>
+            <!-- Card 6 - Agenda de Atendimentos -->
+            <div class="card gradient-2" data-category="agenda" onclick="window.open('https://evolucoes.tilaeeufc.workers.dev/agenda', '_blank')" style="cursor:pointer; display:none;">
+                <div class="card-icon">📅</div>
+                <div class="card-content">
+                    <h3 class="card-title">Agenda de Atendimentos</h3>
+                    <p class="card-description">Visualize e gerencie os atendimentos agendados</p>
+                </div>
+                <div class="card-footer">
+                    <span>Abrir Agenda</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </div>
         </section>
-    </main>
 
     <script>
         // Inicializar mostrando apenas pacientes
